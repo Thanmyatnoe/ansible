@@ -1,0 +1,27 @@
+---
+- name: shutdown esxi vm
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - esxi_vars.yml
+  vars:
+    ansible_playbook_interpreter: "/usr/bin/env python3"
+  tasks:
+   # - set_fact:
+   #     vm_name: "rhel8"
+        
+    - name: shutdown "{{ vm_name }}"
+      vmware_guest:
+        hostname: "{{ esxi_server }}"
+        username: "{{ esxi_user }}"
+        password: "{{ esxi_pass }}"
+        validate_certs: no
+        name: "{{ item }}"
+        state: poweredoff 
+      loop: "{{ vm_name }}"
+      delegate_to: localhost
+      register: facts
+
+    - name: use debug
+      debug:
+        var: facts

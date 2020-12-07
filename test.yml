@@ -1,0 +1,7 @@
+---
+- name: test local
+  hosts: localhost
+  tasks:
+    - name: use debug
+      debug:
+        msg: "{{ ansible_facts }}"

@@ -1,0 +1,21 @@
+---
+- name: power on  esxi guest host
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Set the state of a virtual machine to poweroff
+      vmware_guest_powerstate:
+        hostname: 172.16.193.8 
+        username: root 
+        password: Invoker710!((! 
+        validate_certs: no
+        folder: /ha-datacenter/vm 
+        name: ubuntu18.04 
+        state: powered-on
+      delegate_to: localhost
+      register: deploy
+
+    - name: use debug
+      debug:
+        var: deploy
+

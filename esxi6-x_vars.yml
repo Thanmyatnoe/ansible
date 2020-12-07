@@ -1,0 +1,9 @@
+---
+datacenter: ha-datacenter
+esxi_server: 172.16.193.14
+esxi_user: root
+esxi_pass: Invoker710!((!
+vm_name:
+  - dc1
+
+  

@@ -1,0 +1,27 @@
+---
+- name: revert esxi vm snapshot
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - esxi_vars.yml
+  vars:
+    ansible_playbook_interpreter: "/usr/bin/env python3"
+  tasks:
+    - name: revert "{{ vm_name }}" snapshot
+      vmware_guest_snapshot:
+        hostname: "{{ esxi_server  }}"
+        username: "{{ esxi_user }}"
+        password: "{{ esxi_pass }}"
+        datacenter: "{{ datacenter }}"
+        folder: "/{{ datacenter }}/vm/"
+        name: "{{ item }}"
+        state: revert 
+        snapshot_name: "{{ item }}"
+        validate_certs: False
+      loop: "{{ vm_name }}"
+      delegate_to: localhost
+      register: facts
+
+    - name: use debug
+      debug:
+        var: facts

@@ -1,0 +1,28 @@
+---
+- name: create esxi vm
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - esxi_vars.yml
+  vars:
+    ansible_playbook_interpreter: "/usr/bin/env python3"
+  tasks:
+    - name: create "{{ vm_name }}" snapshot
+      vmware_guest_snapshot:
+        hostname: "{{ esxi_server  }}"
+        username: "{{ esxi_user }}"
+        password: "{{ esxi_pass }}"
+        datacenter: "{{ datacenter }}"
+        folder: "/{{ datacenter }}/vm/"
+        name: "{{ item }}"
+        state: present
+        snapshot_name: "{{ item }}"
+        description: "{{ item }}_snapshot"
+        validate_certs: False
+      loop: "{{ vm_name }}"
+      delegate_to: localhost
+      register: facts
+
+    - name: use debug
+      debug:
+        var: facts

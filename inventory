@@ -1,0 +1,15 @@
+[esxi]
+esxi6-7.esxi.example.com
+esxi6-x.esxi.example.com
+
+[esxi_vm]
+rhel7.esxi.example.com
+centos7.esxi.example.com
+ubuntu.esxi.example.com
+
+[esxi:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_connection=ssh
+ansible_user=root
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+

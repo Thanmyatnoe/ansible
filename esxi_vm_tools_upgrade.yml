@@ -1,0 +1,24 @@
+---
+- name: upgrade esxi vm guest tools 
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - esxi_vars.yml
+  vars:
+    ansible_playbook_interpreter: "/usr/bin/env python3"
+  tasks:
+    - name: Upgrade VMware Tools using MoID
+      vmware_guest_tools_upgrade:
+        hostname: "{{ esxi_server }}"
+        username: "{{ esxi_user }}"
+        password: "{{ esxi_pass }}"
+        name: "{{ item }}"
+        datacenter: "{{ datacenter }}"
+        validate_certs: False
+      loop: "{{ vm_name }}"
+      delegate_to: localhost
+      register: facts
+
+    - name: use debug
+      debug:
+        var: facts

@@ -1,0 +1,27 @@
+---
+- name: esxi vm folder path 
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - esxi_vars.yml
+  vars:
+    ansible_playbook_interpreter: "/usr/bin/env python3"
+  tasks:
+    - name: find "{{ vm_name }}" vm folder path
+      vmware_guest_find:
+        hostname: "{{ esxi_server }}"
+        username: "{{ esxi_user }}"
+        password: "{{ esxi_pass }}"
+        validate_certs: no
+        name: "{{ item }}"
+      loop: "{{ vm_name }}"
+      delegate_to: localhost
+      register: vm_facts
+
+    - name: use debug
+      debug:
+        var: vm_facts
+
+    - name: use msg
+      debug: 
+        var: vm_facts['results'][0]['folders']

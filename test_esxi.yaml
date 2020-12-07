@@ -1,0 +1,16 @@
+---
+- name: test esxi
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Gather all registered virtual machines
+      vmware_vm_info:
+        hostname: 172.16.193.8
+        username: root
+        password: Invoker710!((!
+        validate_certs: false
+      # delegate_to: tower.example.com
+      register: vminfo
+
+    - debug:
+        var: vminfo.virtual_machines
