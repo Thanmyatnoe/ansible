@@ -1,6 +1,6 @@
 Ansible  VMWare ESXi 6.7
 
-Prerequisite
+Prerequisites
 
 - VMWare ESXi 6.7
 -  ansible 2.9.11
@@ -11,28 +11,30 @@ $ pip install pyvmomi
 
 Ansible VMware modules leveraging latest vSphere(6.0+) features are using vSphere Automation Python SDK. The vSphere Automation Python SDK also has client libraries, documentation, and sample code for VMware Cloud on AWS Console APIs, NSX VMware Cloud on AWS integration APIs, VMware Cloud on AWS site recovery APIs, NSX-T APIs.
 
-You can install vSphere Automation Python SDK using pip:
+#You can install vSphere Automation Python SDK using pip:
 
 $ pip install --upgrade git+https://github.com/vmware/vsphere-automation-sdk-python.git
 
 Note:
     Installing vSphere Automation Python SDK also installs pyvmomi. A separate installation of pyvmomi is not required.
 
-Control Node
+
+
+##Control Node
 
 Delegation
 
 Delegation allows you to select the system that executes a given task. If you do not have pyVmomi installed on your control node, use the delegate_to keyword on VMware-specific tasks to execute them on any host where you have pyVmomi installed.
 
-Modules
+##Modules
 
 The units of code Ansible executes. Each module has a particular use, from creating virtual machines on vCenter to managing distributed virtual switches in the vCenter environment. You can invoke a single module with a task, or invoke several different modules in a playbook. For an idea of how many modules Ansible includes, take a look at the list of cloud modules, which includes VMware modules.
 
-Playbooks
+##Playbooks
 
 Ordered lists of tasks, saved so you can run those tasks in that order repeatedly. Playbooks can include variables as well as tasks. Playbooks are written in YAML and are easy to read, write, share and understand.
 
-pyVmomi
+##pyVmomi
 
 Ansible VMware modules are written on top of pyVmomi. pyVmomi is the official Python SDK for the VMware vSphere API that allows user to manage ESX, ESXi, and vCenter infrastructure.
 
@@ -60,7 +62,7 @@ Installing vCenter SSL certificates for Ansible
     Extract the contents of the zip file. The extracted directory contains a .certs directory that contains two types of files. Files with a number as the extension (.0, .1, and so on) are root certificates.
     Install the certificate files are trusted certificates by the process that is appropriate for your operating system.
 
-Installing ESXi SSL certificates for Ansible
+##Installing ESXi SSL certificates for Ansible
 
 - Enable SSH Service on ESXi either by using Ansible VMware module vmware_host_service_manager or manually using vSphere Web interface.
 -   SSH to ESXi server using administrative credentials, and navigate to directory /etc/vmware/ssl
@@ -75,10 +77,11 @@ $ sudo cp rui.crt /usr/share/ca-certificates
 
 
 $  sudo dpkg-reconfigure ca-certificates
+
 $ sudo update-ca-certificates
 
 
-VMware Dynamic Inventory Plugin
+##VMware Dynamic Inventory Plugin
 
 The best way to interact with your hosts is to use the VMware dynamic inventory plugin, which dynamically queries VMware APIs and tells Ansible what nodes can be managed.
 
@@ -100,15 +103,9 @@ To begin, there are a few bits of information we will need. First and foremost i
 The removal VMware virtual machine using vmware_guest module is destructive operation and can not be reverted, so it is strongly recommended to take the backup of virtual machine and related files (vmx and vmdk files) before proceeding.
 
 
-Using VMware HTTP API using Ansible
+##Using VMware HTTP API using Ansible
 
 This guide will show you how to utilize Ansible to use VMware HTTP APIs to automate various tasks.
 
 Since Ansible utilizes the VMware HTTP API using the uri module to perform actions, in this use case it will be connecting directly to the VMware HTTP API from localhost.
 
-
-VMware vSphere ESXi 7.0 Enterprise Plus key
-
-JJ2WR-25L9P-H71A8-6J20P-C0K3F
-HN2X0-0DH5M-M78Q1-780HH-CN214
-JH09A-2YL84-M7EC8-FL0K2-3N2J2
