@@ -2,7 +2,7 @@
 datacenter: ha-datacenter
 esxi_server: 172.16.193.8
 esxi_user: root
-esxi_pass: example
+esxi_pass: Invoker710!((!
 vm_name:
   - rhel7
   - centos7

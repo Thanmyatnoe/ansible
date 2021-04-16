@@ -1,6 +1,5 @@
 [esxi]
 esxi6-7.esxi.example.com
-esxi6-x.esxi.example.com
 
 [esxi_vm]
 rhel7.esxi.example.com

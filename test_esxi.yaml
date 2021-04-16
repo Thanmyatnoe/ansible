@@ -14,3 +14,4 @@
 
     - debug:
         var: vminfo.virtual_machines
+
